@@ -43,7 +43,7 @@ body {
     border-color:  var(--cdbg) var(--chl) var(--chl) var(--cdbg) ;
 
     text-align: right;
-    color: var(--ffffff);
+    color: var(--cbright);
 }
 
 .buttoncontainer {
