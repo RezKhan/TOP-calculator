@@ -57,19 +57,28 @@ body {
     gap: 5px;
 }
 
-.numberbutton {
-    background-color: var(--clhighlight);
+button {
     border-color: var(--cdbg);
+    /* border: 4px solid; */
     font-family: monospace;
     font-size: xx-large;
 }
 
-#num0 {
-    grid-column: 1/3;
+.numberbutton {
+    background-color: var(--clhighlight);
 }
+.numberbutton:active {
+    background-color: var(--cdarker);
+}
+
 .operatorbutton {
     background-color: var(--cdark);
-    border-color: var(--cdbg);
-    font-family: monospace;
-    font-size: xx-large;
+}
+.operatorbutton:active {
+    background-color: var(--cdarker);
+}
+
+
+#num0 {
+    grid-column: 1/3;
 }
