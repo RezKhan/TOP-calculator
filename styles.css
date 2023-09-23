@@ -1,0 +1,96 @@
+/* Pallet: https://lospec.com/palette-list/massillon-8 */
+
+:root {
+    --dvanilla: #cdd4a5;
+    --tan: #cfa98a;
+    --dpeach: #c7786f;
+    --drose: #9a6278;
+
+    --bcoral: #60556e;
+    --jacarta: #3b405e;
+    --spcblue: #2e2a4f;
+    --dblue: #211d38;
+}
+
+body {
+    background-color: var(--dblue);
+    font-family: monospace;
+    font-size: xx-large;
+}
+
+.maincontainer {
+    width: 800px;
+    margin: auto;
+}
+
+.calculatorcontainer {
+    background-image: linear-gradient(120deg, var(--bcoral), var(--spcblue));
+    width: 500px;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid;
+    border-color: var(--jacarta);
+    border-radius: 10px;
+}
+
+.calcdisplay {
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+    background-image: linear-gradient(120deg, var(--dblue), var(--spcblue));
+    border: 2px solid;
+    border-radius: 5px;
+    border-color:  var(--spcblue) var(--bcoral) var(--bcoral) var(--spcblue) ;
+
+    text-align: right;
+    color: var(--dvanilla);
+}
+
+.buttoncontainer {
+    width: 90%;
+    height: 450px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.numberbuttoncontainer {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    border: 1px solid;
+    border-color: var(--dblue);
+}
+
+.operatorbuttoncontainer {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    border: 1px solid;
+    border-color: var(--dblue);
+}
+
+.buttonrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.numberbutton {
+    width: 100px;
+    height: 100px;
+    font-family: monospace;
+    font-size: xx-large;
+}
+
+.operatorbutton {
+    width: 100px;
+    height: 100px;
+    font-family: monospace;
+    font-size: xx-large;
+}
