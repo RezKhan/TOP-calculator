@@ -59,6 +59,7 @@ body {
 
 button {
     border-color: var(--cdbg);
+    border-radius: 5px;
     /* border: 4px solid; */
     font-family: monospace;
     font-size: xx-large;
@@ -73,6 +74,9 @@ button {
 
 .operatorbutton {
     background-color: var(--cdark);
+}
+.specbutton {
+    background-color: var(--chl);
 }
 .operatorbutton:active {
     background-color: var(--cdarker);
