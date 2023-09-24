@@ -3,21 +3,22 @@
 let operatorList = [];
 let numberList = [];
 let opSequence = [];
-let calcDisplay = document.querySelector(".calcdisplay");
+const calcDisplay = document.querySelector(".calcdisplay");
+const calcButtons = document.querySelectorAll("button");
 
-
-function clearOperationButtons() {
-    let opbtns = document.querySelectorAll("button");
-    opbtns.forEach(opbtn => opbtn.removeAttribute("disabled"));
+function clearDisabledButtons() {
+    calcButtons.forEach(opbtn => opbtn.removeAttribute("disabled"));
 }
 
 function clickedOperator(btn) {
-    clearOperationButtons();
+    clearDisabledButtons();
     if (numberList.length > 0) {
         opSequence.push(Number(numberList.join("")));
         numberList = [];
     }
-    console.log(opSequence);
+    if (btn.target.value === "/") {
+
+    }
     if (btn.target.value !== "=") {
         btn.target.setAttribute("disabled", true);
         operatorList.push(btn.target.value)
@@ -26,13 +27,10 @@ function clickedOperator(btn) {
 
 function clickedNumber(btn) {
     if (operatorList.length > 0) {
-        clearOperationButtons();
+        clearDisabledButtons();
         opSequence.push(operatorList.pop());
         operatorList = [];
         calcDisplay.innerHTML = "";
-    }
-    if (typeof opSequence[opSequence.length - 1] === "string") {
-        // 
     }
     numberList.push(btn.target.value);
     if (calcDisplay.innerHTML === "0") {
@@ -40,19 +38,17 @@ function clickedNumber(btn) {
     } else {
         calcDisplay.innerHTML += btn.target.value;
     }
-
-    console.log(numberList);
 }
 
 function specButton(btn) {
-    //TODO
-    console.log(btn.target.value);
+    // This is a but ugly
     switch(btn.target.value) {
         case "AC":
             operatorList = [];
             numberList = [];
             opSequence = []; 
             calcDisplay.innerHTML = "0";
+            clearDisabledButtons();
             break;
         case "pm":
             if (numberList[0] === "-") {
@@ -80,14 +76,67 @@ function specButton(btn) {
             numberList = tempnum.toString().split("");
             break;
     }
+}
 
+function checkOpSequence() {
+    let stillGood = true;
+    for (let i = 0; i < opSequence.length; i += 2) {
+        if (typeof opSequence[i] !== "number") {
+            stillGood = false;
+            if ((i + 1) < opSequence.length ) {
+                if (typeof opSequence[i+1] === "string") {
+                    stillGood = false;
+                }
+            }
+        }
+    }
+    return stillGood;
+}
+
+function completeSequence() {
+    // TODO
+    let firstNum = opSequence.shift();
+    let operator = opSequence.shift();
+    let secondNum = opSequence.shift();
+
+    switch(operator) {
+        case "+":
+            firstNum = firstNum + secondNum;
+            break;
+        case "-":
+            firstNum = firstNum - secondNum;
+            break;
+        case "x":
+            firstNum = firstNum * secondNum;
+            break;
+        case "/":
+            firstNum = firstNum / secondNum;
+            break;
+    }
+    opSequence.unshift(firstNum);
+
+    if (opSequence.length > 1) {
+        completeSequence();
+    }
+    if (opSequence.length === 0) {
+        opSequence[0] = firstNum;
+    }
+    calcDisplay.innerHTML = opSequence[0];
 }
 
 function equalsButton() {
-    // TODO
-    
+    clearDisabledButtons();
+    if (numberList.length > 0) {
+        opSequence.push(Number(numberList.join("")));
+        numberList = [];
+    }
+    if (typeof opSequence[opSequence.length-1] === "string") {
+        opSequence.pop();
+    }
+    if (checkOpSequence()) {
+        completeSequence();
+    }
 }
-
 
 function clickHandler(btn) {
     if (btn.target.classList.contains("operatorbutton")) {
@@ -104,7 +153,6 @@ function clickHandler(btn) {
     }
 }
 
-let calcButtons = document.querySelectorAll("button");
 calcButtons.forEach(btn => {
     btn.addEventListener("click", clickHandler);
 });
