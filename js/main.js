@@ -32,6 +32,9 @@ function clickedNumber(btn) {
         operatorList = [];
         calcDisplay.innerHTML = "";
     }
+    if (numberList.includes(".") && btn.target.value === ".")  {
+        return;
+    }
     numberList.push(btn.target.value);
     if (calcDisplay.innerHTML === "0") {
         calcDisplay.innerHTML = btn.target.value;
@@ -41,7 +44,7 @@ function clickedNumber(btn) {
 }
 
 function specButton(btn) {
-    // This is a but ugly
+    // This is a bit ugly
     switch(btn.target.value) {
         case "AC":
             operatorList = [];
@@ -94,7 +97,6 @@ function checkOpSequence() {
 }
 
 function completeSequence() {
-    // TODO
     let firstNum = opSequence.shift();
     let operator = opSequence.shift();
     let secondNum = opSequence.shift();
@@ -156,4 +158,3 @@ function clickHandler(btn) {
 calcButtons.forEach(btn => {
     btn.addEventListener("click", clickHandler);
 });
-
